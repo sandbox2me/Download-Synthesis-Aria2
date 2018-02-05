@@ -30,11 +30,11 @@ function sendTo(url, fileName, filePath, header, server) {
 						secret: item.token,
 						path: "/" + item.interf
 					};
-					
+
 					var aria2 = new Aria2(options);
 					// check whether aria2 is runnning
 					isRunning(item, aria2);
-					
+
 					// Send TO Aria2
 					filePath = filePath.replace(/\\/g, '\\\\');
 					item.path = item.path.replace(/\\/g, '\\\\');
@@ -139,9 +139,9 @@ function sendTo(url, fileName, filePath, header, server) {
 						secret: item.token2,
 						path: "/" + item.interf2
 					};
-					
+
 					var aria2 = new Aria2(options);
-					
+
 					// Send TO Aria2
 					filePath = filePath.replace(/\\/g, '\\\\');
 					item.path2 = item.path2.replace(/\\/g, '\\\\');
@@ -242,9 +242,9 @@ function sendTo(url, fileName, filePath, header, server) {
 						secret: item.token3,
 						path: "/" + item.interf3
 					};
-					
+
 					var aria2 = new Aria2(options);
-					
+
 					// Send TO Aria2
 					filePath = filePath.replace(/\\/g, '\\\\');
 					item.path3 = item.path3.replace(/\\/g, '\\\\');
@@ -346,7 +346,7 @@ function save(url, fileName, filePath, header, as, wid, incog) {
 			saveAs: as,
 			url: url,
 		});
-	} 
+	}
 	else {
 		var downloading = browser.downloads.download({
 			//conflictAction: "prompt",  //not work
@@ -355,7 +355,7 @@ function save(url, fileName, filePath, header, as, wid, incog) {
 			url: url,
 		});
 	}
-	
+
 	// close download panel
 	if (wid != 0) downloading.then(id => {
 		browser.windows.remove(wid)
@@ -466,7 +466,7 @@ function getFileName(d) {
 					id1 = d.url.lastIndexOf("?");
 					if (id1 == -1) {
 						fileName = d.url.slice(id + 1);
-						
+
 					}
 				}
 			}
@@ -477,7 +477,7 @@ function getFileName(d) {
 		if (id >= 0) {
 			id1 = d.url.lastIndexOf("?");
 			if (id1 == -1) {
-				fileName = d.url.slice(id + 1);	
+				fileName = d.url.slice(id + 1);
 			}
 			else {
 				fileName = d.url.slice(id + 1, id1);
@@ -542,7 +542,7 @@ function isException(d) {
 async function prepareDownload(d) {
 	var details = {};
 	details.url = d.url;
-	
+
 	// get request item
 	var id = request.findIndex(x => x.requestId === d.requestId);
 	if (id >= 0) {
@@ -557,10 +557,10 @@ async function prepareDownload(d) {
 	else {
 		details.requestHeaders = ""
 	}
-	
+
 	// process file name
 	details.fileName = getFileName(d);
-	
+
 	// decode URI Component
 	details.url = decodeURIComponent(details.url);
 	details.fileName = decodeURIComponent(details.fileName);
@@ -569,20 +569,20 @@ async function prepareDownload(d) {
 	details.fileName = details.fileName.replace('\";', '');
 	details.fileName = details.fileName.replace('\"', '');
 	details.fileName = details.fileName.replace('\"', '');
-	
+
 	// correct File Name
 	var getting = correctFileName(details.fileName);
 	await getting.then ((name) => {
 		details.fileName = name;
 		}
 	);
-	
+
 	// get file size
 	details.fileSize = getFileSize(d);
-	
+
 	// create download panel
 	downloadPanel(details);
-	
+
 	// avoid blank new tab
 	var getting = browser.tabs.query({
 		active: true,
@@ -618,11 +618,11 @@ function observeResponse(d) {
 		else if (d.responseHeaders.find(x => x.name.toLowerCase() === 'content-type') != undefined) {
 			var contentType = d.responseHeaders.find(x => x.name.toLowerCase() === 'content-type').value
 				.toLowerCase();
-			if (contentType.slice(0, 11) == "application" 
-				&& contentType.slice(12, 15) != "pdf" 
-				&& contentType.slice(12, 17) != "xhtml" 
+			if (contentType.slice(0, 11) == "application"
+				&& contentType.slice(12, 15) != "pdf"
+				&& contentType.slice(12, 17) != "xhtml"
 				&& contentType.slice(12, 23) != "x-xpinstall"
-				&& contentType.slice(12, 29) != "x-shockwave-flash" 
+				&& contentType.slice(12, 29) != "x-shockwave-flash"
 				&& contentType.slice(12, 15) != "rss"
 				&& contentType.slice(12, 16) != "json" ) {
 				//console.log(contentType);
@@ -645,7 +645,7 @@ function observeResponse(d) {
 						return {cancel: false};
 					prepareDownload(d);
 					return {cancel: true};
-				} 
+				}
 				else if (contentType.slice(0, 4) == "video") {
 					//console.log(contentType);
 					if (isException(d))
@@ -660,7 +660,7 @@ function observeResponse(d) {
 					prepareDownload(d);
 					return {cancel: true};
 				}
-			}	
+			}
 		}
 	}
 	// get request item and delete
@@ -710,7 +710,7 @@ function changeState(enabled) {
 		browser.storage.local.set({
 			enabled: true
 		});
-		
+
 	}
 	else {
 		browser.webRequest.onHeadersReceived.removeListener(observeResponse);
@@ -732,7 +732,7 @@ function changeState(enabled) {
 		}
 	});
 	browser.browserAction.setTitle({
-		title: browser.i18n.getMessage("extensionName") + 
+		title: browser.i18n.getMessage("extensionName") +
 		` "${enabled ? browser.i18n.getMessage("enabled") : browser.i18n.getMessage("disabled")}"`
 	});
 }
@@ -810,7 +810,7 @@ function contextMenus (enabled){
 			contexts: ['video', 'audio'],
 			documentUrlPatterns: ['*://*/*']
 		});
-		
+
 		browser.contextMenus.onClicked.addListener(cmCallback);
 	}
 	else {
@@ -835,13 +835,13 @@ function contextMenus (enabled){
 			browser.storage.local.get(config.command.guess, item => {
 				if (d.reason == "update" && item.chgLog == true){
 					browser.tabs.create({
-						url: "https://github.com/RossWang/Aria2-Integration/blob/master/CHANGELOG.md"
+						url: "https://github.com/DanaMW/Download-Synthesis-Aria2/blob/master/CHANGELOG.md"
 					});
 				}
 			});
 		}
 	});
-	
+
 });
 
 function loadSettings() {
@@ -864,5 +864,3 @@ function loadSettings() {
 	loadSettings();
 	browser.runtime.onMessage.addListener(handleMessage);
 })();
-
-
