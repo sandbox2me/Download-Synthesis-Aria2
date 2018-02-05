@@ -1,6 +1,6 @@
 {
-  "name": "__MSG_extensionName__",
-  "description": "__MSG_extensionDescription__",
+  "name": "Download-Synthesis-Aria2",
+  "description": "Firefox download manager addon",
   "version": "0.0.1",
   "default_locale": "en",
   "manifest_version": 2,
