@@ -1,7 +1,7 @@
 {
   "name": "Download-Synthesis-Aria2",
-  "description": "Firefox download manager addon",
-  "version": "0.0.1",
+  "description": "A Firefox download manager extension using Aria2",
+  "version": "0.0.2",
   "default_locale": "en",
   "manifest_version": 2,
   "permissions": [
@@ -42,14 +42,14 @@
      "128": "data/icons/128.png",
      "256": "data/icons/256.png"
   },
-  "homepage_url": "https://github.com/DanaMW/Download-Synthesis-Aria2",
+  "homepage_url": "https://addons.mozilla.org/firefox/addon/Download-Synthesis-Aria2",
   "options_ui": {
     "page": "data/options/menu.html",
 	"open_in_tab": true
   },
   "applications": {
     "gecko": {
-      "id": "{Download-Synthesis-Aria2@gmail.com}",
+      "id": "Download-Synthesis-Aria2@gmail.com",
 	  "strict_min_version": "57.0"
     }
   }
