@@ -1,7 +1,7 @@
 {
   "name": "Download-Synthesis-Aria2",
   "description": "A Firefox download manager extension using Aria2",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "default_locale": "en",
   "manifest_version": 2,
   "permissions": [
